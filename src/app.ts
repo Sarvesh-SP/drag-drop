@@ -72,7 +72,7 @@ class ProjectState extends State<Project> {
 	moveProject(projectId: string, newStatus: ProjectStatus) {
 		const project = this.projects.find((prj) => prj.id === projectId);
 
-		if (project) {
+		if (project && project.status !== newStatus) {
 			project.status = newStatus;
 			this.updateListeners();
 		}
@@ -282,7 +282,7 @@ class ProjectList
 				if (this.type === "active") {
 					return prj.status === ProjectStatus.Active;
 				}
-				prj.status === ProjectStatus.Finished;
+				return prj.status === ProjectStatus.Finished;
 			});
 			this.assignedProjects = relevantProjects;
 			this.renderProjects();
